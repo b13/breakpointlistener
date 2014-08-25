@@ -1,6 +1,11 @@
 {
 	"name": "breakpointlistener",
 	"homepage": "https://github.com/b13/breakpointlistener",
+	"dependencies": {
+		"requirejs": "~2.1.5",
+		"jquery": "~2.1.1",
+	},
+	"version": "0.1.0",
 	"_release": "v0.2.0",
 	"_resolution": {
 		"type": "branch",
