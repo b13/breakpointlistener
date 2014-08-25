@@ -1,11 +1,11 @@
 {
 	"name": "breakpointlistener",
-	"homepage": "https://github.com/b13/breakpointlistener"
-	"_release": "af0d182e37",
+	"homepage": "https://github.com/b13/breakpointlistener",
+	"_release": "v0.1",
 	"_resolution": {
 		"type": "branch",
 		"branch": "master",
-		"commit": "af0d182e37bde8398d2b8a63e1fa084240f8b518"
+		"commit": "309463b38a390e9cf51e377605ee49014f71f222"
 	},
 	"_source": "https://github.com/b13/breakpointlistener.git",
 	"_target": "*",
