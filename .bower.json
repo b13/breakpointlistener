@@ -1,0 +1,14 @@
+{
+	"name": "breakpointlistener",
+	"homepage": "https://github.com/b13/breakpointlistener"
+	"_release": "af0d182e37",
+	"_resolution": {
+		"type": "branch",
+		"branch": "master",
+		"commit": "af0d182e37bde8398d2b8a63e1fa084240f8b518"
+	},
+	"_source": "https://github.com/b13/breakpointlistener.git",
+	"_target": "*",
+	"_originalSource": "https://github.com/b13/breakpointlistener.git",
+	"_direct": true
+}

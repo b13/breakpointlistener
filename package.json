@@ -1,0 +1,36 @@
+{
+  "name": "breakpointlistener",
+  "description": "breakpoint listener",
+  "version": "0.1.0",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt qunit"
+  },
+  "author": {
+    "name": "Benjamin Gröner",
+    "email": "benjamin.groener@b13.de",
+    "url": "b13.de"
+  },
+  "company": {
+	  "name"   : "b:dreizehn",
+	  "street" : "Breitscheitstraße 65",
+	  "zip"    : "70176",
+	  "city"   : "Stuttgart",
+	  "mail"   : "info@b13.de"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://mit-license.org"
+    }
+  ],
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-uglify": "*"
+  },
+  "dependencies": {
+    "grunt-contrib-copy": "^0.5.0"
+  }
+}
