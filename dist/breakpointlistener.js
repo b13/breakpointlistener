@@ -1,10 +1,12 @@
 define('breakpointlistener'
-	, ['jquery']
-	, function($){
-		var BreakpointListener = function(opts){
-			var bph = this
-				, defaultOptions = {};
+, ['jquery']
+, function($){
+	var BreakpointListener = function(opts){
+		var
+			bph = this
+			, defaultOptions = {};
 
+		function initialize(opts) {
 			bph.options = $.extend(defaultOptions, opts || {});
 
 			bph.breakpointHandlers = [];
@@ -36,44 +38,41 @@ define('breakpointlistener'
 				bph.updateBreakPoint();
 			}
 			return bph.currentBreakPoint;
-		}
+		};
 
 		bph.offChangeBreakpoint = function(handler){
 			bph.unregisterBreakPointHandler(handler);
-		}
+		};
 
 		bph.onChangeBreakpoint = function(handler){
 			bph.registerBreakPointHandler(handler);
-		}
+		};
 
 		bph.registerBreakPointHandler = function(handler){
 			if(_.isFunction(handler)){
 				bph.breakpointHandlers.push(handler);
 			}
-		}
+		};
 
 		bph.unregisterBreakPointHandler = function(handler){
 			bph.breakpointHandlers = _.without(bph.breakpointHandlers, handler);
-		}
+		};
 
 		bph.updateBreakPoint = function(){
 			var width = $(window).width()
 				, breakpoint = 'xs';
 
-			$.each(bph.options.breakpoints, function(key, val){			function initialize(opts) {
+			$.each(bph.options.breakpoints, function(key, val){
+				if(width < val) return breakpoint;
+				breakpoint = key;
+			});
+			bph.currentBreakPoint = breakpoint;
 
-					if(width < val) return breakpoint;
-					breakpoint = key;
-				})
-				bph.currentBreakPoint = breakpoint;
+			return breakpoint;
+		};
 
-				return breakpoint;
-			}
+		initialize(opts);
+	};
 
-			initialize(opts);
-		}
-
-		return BreakpointListener;
-	}
-);
-
+	return BreakpointListener;
+});

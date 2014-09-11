@@ -14,7 +14,7 @@ module.exports = function (grunt) {
 		copy     : {
 			main: {
 				files: [
-					{expand: true, flatten: true, src: ['lib/breakpointlistener.js', 'lib/breakpointlistener.min.js'], dest: ''}
+					{expand: true, flatten: true, src: ['src/breakpointlistener.js'], dest: 'dist/'}
 				]
 			}
 		},
@@ -24,8 +24,8 @@ module.exports = function (grunt) {
 				banner: '<%= banner %>'
 			},
 			dist   : {
-				src : 'lib/breakpointlistener.js',
-				dest: 'lib/breakpointlistener.min.js'
+				src : 'dist/breakpointlistener.js',
+				dest: 'dist/breakpointlistener.min.js'
 			}
 		}
 	});
@@ -35,6 +35,6 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-copy');
 
 	// Default task.
-	grunt.registerTask('default', ['uglify', 'copy']);
+	grunt.registerTask('default', ['copy', 'uglify']);
 
 };

@@ -1,7 +1,7 @@
 {
 	"name": "breakpointlistener",
 	"description": "Breakpoint listener",
-	"main": "lib/breakpointlistener.js",
+	"main": "dist/breakpointlistener.js",
 	"version": "0.0.1",
 	"dependencies": {
 		"jquery": ">= 1.8.0"
