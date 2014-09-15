@@ -15,6 +15,6 @@
 	"_source": "https://github.com/b13/breakpointlistener.git",
 	"_target": "*",
 	"_originalSource": "https://github.com/b13/breakpointlistener.git",
-	"_direct": true
+	"_direct": true,
 	"ignore": [ "./Gruntfile.js"]
 }
