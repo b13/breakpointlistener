@@ -29,6 +29,8 @@ the commonly used identifiers xs, sm, md and lg.
 	
 	BreakpointListener.getCurrentBreakpoint();
 
+Returns a string representation of the current breakpoint. 
+
 
 ### Binding breakpoint change handlers
 
@@ -60,7 +62,7 @@ registerBreakpointHandler(handler); is equivalent to onChangeBreakpoint(handler)
 	});
 
 Simply register callbacks to listen to breakpoint changes. The callback will receive an evt parameter, that contains:
-	- currentBreakpoint	// The breakpoint that is now active
-	- lastBreakpoint	// The breakpoint that was active before the breakpoint change
-	- timestamp			// Time when the change occurred
+- currentBreakpoint	// The breakpoint that is now active
+- lastBreakpoint	// The breakpoint that was active before the breakpoint change
+- timestamp			// Time when the change occurred
 	
