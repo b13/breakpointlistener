@@ -1,6 +1,8 @@
-define('breakpointlistener'
-, ['jquery']
-, function($){
+define('breakpointlistener', [
+	'jquery'
+	, 'underscore'
+] , function($, _) {
+
 	var BreakpointListener = function(opts){
 		var
 			bpl = this
