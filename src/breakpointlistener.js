@@ -1,111 +1,120 @@
-define('breakpointlistener', [
-	'jquery'
-	, 'underscore'
-] , function($, _) {
+define('breakpointlistener', function(){
+
+	function clone(obj) {
+		if (null == obj || "object" != typeof obj) return obj;
+		var copy = obj.constructor();
+		for (var attr in obj) {
+			if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+		}
+		return copy;
+	}
+
+	function extend(){
+		if(!arguments.length) return undefined;
+
+		var targetObj = arguments[0];
+
+		for(var i = arguments.length - 1; i > 0; i--){
+			if (null == arguments[i] || "object" != typeof arguments[i]) continue;
+			for(var attr in arguments[i]){
+				if (arguments[i].hasOwnProperty(attr)) targetObj[attr] = arguments[i][attr];
+			}
+		}
+
+		return targetObj;
+	}
 
 	var BreakpointListener = function(opts){
 		var
-			bpl = this
+			bph = this
 			, defaultOptions = {};
 
-		/**
-		 * Initialize the breakpointListener intance
-		 * @param opts
-		 */
 		function initialize(opts) {
-			bpl.options = $.extend(defaultOptions, opts || {});
+			bph.options = extend(clone(defaultOptions), opts || {});
 
-			bpl.breakpointHandlers = [];
-			bpl.currentBreakpoint = bpl.getCurrentBreakpoint();
+			bph.breakpointHandlers = [];
+			bph.currentBreakPoint = bph.getCurrentBreakPoint();
+
+			//Bind function scope
+			bph.onResize = function(){
+				onResize.apply(bph, arguments);
+			};
 
 			bindEvents();
 		}
 
-		/**
-		 * Binding events
-		 */
 		function bindEvents() {
-			$(window).on('resize', onResize);
+			window.addEventListener('resize', bph.onResize, false)
 		}
 
-		/**
-		 * Resize handler
-		 */
 		function onResize() {
 			var evt = {
-				lastBreakpoint     : bpl.currentBreakpoint
-				,currentBreakpoint :bpl.updateBreakpoint()
+				lastBreakPoint     : bph.currentBreakPoint
+				,currentBreakPoint : bph.updateBreakPoint()
 				,timestamp : new Date()
 			};
 
-			if(evt.lastBreakpoint != evt.currentBreakpoint){
-				$.each(bpl.breakpointHandlers, function(index, handler){
-					handler(evt);
-				});
+			$(window).innerWidth();
+
+			if(evt.lastBreakPoint != evt.currentBreakPoint){
+				for(var index in bph.breakpointHandlers){
+					bph.breakpointHandlers[index].call(bph, evt);
+				}
 			}
 		}
 
-		/**
-		 * Returns a string representation of the current breakpoint
-		 * @returns {*}
-		 */
-		bpl.getCurrentBreakpoint = function(){
-			if(!bpl.currentBreakpoint){
-				bpl.updateBreakpoint();
+		bph.getCurrentBreakPoint = function(){
+			if(!bph.currentBreakPoint){
+				bph.updateBreakPoint();
 			}
-			return bpl.currentBreakpoint;
+			return bph.currentBreakPoint;
 		};
 
-		/**
-		 * Unregister a breakpoint change handler.
-		 * Does the same as unregisterBreakpointHandler.
-		 * @param handler
-		 */
-		bpl.offChangeBreakpoint = function(handler){
-			bpl.unregisterBreakpointHandler(handler);
+		bph.getViewPortWidth = function(){
+			var viewPortWidth;
+
+			if (document.compatMode === 'BackCompat') {
+				viewPortWidth = document.body.clientWidth;
+			} else {
+				viewPortWidth = document.documentElement.clientWidth;
+			}
+
+			return viewPortWidth;
 		};
 
-		/**
-		 * Register a breakpoint change handler.
-		 * Does tha same as registerBreakpointHandler.
-		 * @param handler
-		 */
-		bpl.onChangeBreakpoint = function(handler){
-			bpl.registerBreakpointHandler(handler);
+		bph.offChangeBreakpoint = function(handler){
+			bph.unregisterBreakPointHandler(handler);
 		};
 
-		/**
-		 * Register a breakpoint change handler.
-		 * @param handler
-		 */
-		bpl.registerBreakpointHandler = function(handler){
-			if(_.isFunction(handler)){
-				bpl.breakpointHandlers.push(handler);
+		bph.onChangeBreakpoint = function(handler){
+			bph.registerBreakPointHandler(handler);
+		};
+
+		bph.registerBreakPointHandler = function(handler){
+			if(typeof handler === 'function'){
+				bph.breakpointHandlers.push(handler);
 			}
 		};
 
-		/**
-		 * Unregister a breakpoint change handler.
-		 * @param handler
-		 */
-		bpl.unregisterBreakpointHandler = function(handler){
-			bpl.breakpointHandlers = _.without(bpl.breakpointHandlers, handler);
+		bph.unregisterBreakPointHandler = function(handler){
+			var handlerIndex = bph.breakpointHandlers.indexOf(handler);
+
+			if(handlerIndex > -1){
+				bph.breakpointHandlers.splice(handlerIndex, 1);
+			}
 		};
 
-		/**
-		 * Function that computes which breakpoint is the current one.
-		 * Can be triggered manually if needed.
-		 * @returns {string}
-		 */
-		bpl.updateBreakpoint = function(){
-			var width = $(window).width()
+		bph.updateBreakPoint = function(){
+			var width = this.getViewPortWidth()
 				, breakpoint = 'xs';
 
-			$.each(bpl.options.breakpoints, function(key, val){
-				if(width < val) return breakpoint;
+			for(var key in bph.options.breakpoints){
+				var val = bph.options.breakpoints[key];
+				if(width < val) break;
 				breakpoint = key;
-			});
-			bpl.currentBreakpoint = breakpoint;
+			}
+
+			bph.currentBreakPoint = breakpoint;
 
 			return breakpoint;
 		};

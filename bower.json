@@ -1,10 +1,9 @@
 {
-	"name": "breakpointlistener",
-	"description": "Breakpoint listener",
-	"main": "dist/breakpointlistener.js",
-	"version": "v0.2.4",
-	"dependencies": {
-		"jquery": ">= 1.8.0",
-	  	"underscore": ">= 1.7.0"
-	}
+  "name": "breakpointlistener",
+  "description": "Breakpoint listener",
+  "homepage": "https://github.com/b13/breakpointlistener",
+  "main": "dist/breakpointlistener.js",
+  "version": "1.0.0",
+  "dependencies": {},
+  "ignore": [ "./Gruntfile.js"]
 }
