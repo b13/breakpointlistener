@@ -3,7 +3,15 @@
   "description": "Breakpoint listener",
   "homepage": "https://github.com/b13/breakpointlistener",
   "main": "dist/breakpointlistener.js",
-  "version": "1.0.1",
-  "dependencies": {},
-  "ignore": [ "./Gruntfile.js"]
+  "version": "1.0.0",
+  "dependencies": {
+    "bowser": "~0.7.2"
+  },
+  "ignore": [
+    "./Gruntfile.js"
+  ],
+  "devDependencies": {
+    "requirejs": "~2.1.15",
+    "bootstrap": "~3.3.2"
+  }
 }

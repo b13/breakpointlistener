@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>b_dropdown</title>
+
+	<meta charset="UTF-8">
+	<meta name="description" content="breakpointlistener testing page">
+	<meta name="author" content="Benjamin Gröner">
+
+	<link rel="stylesheet" type="text/css" href="css/test.css" media="all" />
+	<script data-main="js/test" src="js/contrib/require.js"></script>
+</head>
+<body>
+	<header class="container">
+		<h1>breakpointlistener testing page</h1>
+	</header>
+	<main class="container">
+		<dl class="bJS_dataDisplay row">
+			<dt class="col-xs-6">JS Viewport width:</dt>
+			<dd class="col-xs-6 bJS_dataDisplay-width"></dd>
+			<dt class="col-xs-6">JS Viewport height:</dt>
+			<dd class="col-xs-6 bJS_dataDisplay-height"></dd>
+		</dl>
+		<div class="b_cssFields">
+			<h2>CSS Fields</h2>
+			<div class="visible-xs b_testField b_background-red">
+				<h3>css breakpoint XS</h3>
+			</div>
+			<div class="visible-sm b_testField b_background-yellow">
+				<h3>css breakpoint SM</h3>
+			</div>
+			<div class="visible-md b_testField b_background-green">
+				<h3>css breakpoint MD</h3>
+			</div>
+			<div class="visible-lg b_testField b_background-blue">
+				<h3>css breakpoint LG</h3>
+			</div>
+		</div>
+		<div class="b_jsFields">
+			<h2>JS Fields</h2>
+			<div class="bJS_visible-xs b_testField b_background-red">
+				<h3>js breakpoint XS</h3>
+			</div>
+			<div class="bJS_visible-sm b_testField b_background-yellow">
+				<h3>js breakpoint SM</h3>
+			</div>
+			<div class="bJS_visible-md b_testField b_background-green">
+				<h3>js breakpoint MD</h3>
+			</div>
+			<div class="bJS_visible-lg b_testField b_background-blue">
+				<h3>js breakpoint LG</h3>
+			</div>
+		</div>
+	</main>
+
+</body>
+</html>

@@ -1,4 +1,4 @@
-define('breakpointlistener', function(){
+define('breakpointlistener', ['bowser'], function(bowser){
 
 	function clone(obj) {
 		if (null == obj || "object" != typeof obj) return obj;
@@ -33,7 +33,7 @@ define('breakpointlistener', function(){
 			bph.options = extend(clone(defaultOptions), opts || {});
 
 			bph.breakpointHandlers = [];
-			bph.currentBreakPoint = bph.getCurrentBreakPoint();
+			bph.currentBreakpoint = bph.getCurrentBreakpoint();
 
 			//Bind function scope
 			bph.onResize = function(){
@@ -49,52 +49,65 @@ define('breakpointlistener', function(){
 
 		function onResize() {
 			var evt = {
-				lastBreakPoint     : bph.currentBreakPoint
-				,currentBreakPoint : bph.updateBreakPoint()
+				lastBreakpoint     : bph.currentBreakpoint
+				,currentBreakpoint : bph.updateBreakpoint()
 				,timestamp : new Date()
 			};
 
-			if(evt.lastBreakPoint != evt.currentBreakPoint){
-				for(var index in bph.breakpointHandlers){
-					bph.breakpointHandlers[index].call(bph, evt);
+			if(evt.lastBreakpoint != evt.currentBreakpoint){
+				if(bph.breakpointHandlers.length){
+					for(var i = 0; i < bph.breakpointHandlers.length; i++){
+						bph.breakpointHandlers[i].call(bph, evt);
+					}
 				}
 			}
 		}
 
-		bph.getCurrentBreakPoint = function(){
-			if(!bph.currentBreakPoint){
-				bph.updateBreakPoint();
+		bph.getCurrentBreakpoint = function(){
+			if(!bph.currentBreakpoint){
+				bph.updateBreakpoint();
 			}
-			return bph.currentBreakPoint;
+			return bph.currentBreakpoint;
+		};
+
+		bph.getViewPortHeight = function(){
+			var e = window, a = 'inner';
+			if (!('innerHeight' in window )) {
+				a = 'client';
+				e = document.documentElement || document.body;
+			}
+			return e[ a+'Height' ];
 		};
 
 		bph.getViewPortWidth = function(){
-			var viewPortWidth;
+			var e = window, a = 'inner';
 
-			if (document.compatMode === 'BackCompat') {
-				viewPortWidth = document.body.clientWidth;
-			} else {
-				viewPortWidth = document.documentElement.clientWidth;
+			if(bowser.msie){
+				return document.documentElement.innderWidth
 			}
 
-			return viewPortWidth;
+			if (!('innerWidth' in window )) {
+				a = 'client';
+				e = document.documentElement || document.body;
+			}
+			return e[ a+'Width' ];
 		};
 
 		bph.offChangeBreakpoint = function(handler){
-			bph.unregisterBreakPointHandler(handler);
+			bph.unregisterBreakpointHandler(handler);
 		};
 
 		bph.onChangeBreakpoint = function(handler){
-			bph.registerBreakPointHandler(handler);
+			bph.registerBreakpointHandler(handler);
 		};
 
-		bph.registerBreakPointHandler = function(handler){
+		bph.registerBreakpointHandler = function(handler){
 			if(typeof handler === 'function'){
 				bph.breakpointHandlers.push(handler);
 			}
 		};
 
-		bph.unregisterBreakPointHandler = function(handler){
+		bph.unregisterBreakpointHandler = function(handler){
 			var handlerIndex = bph.breakpointHandlers.indexOf(handler);
 
 			if(handlerIndex > -1){
@@ -102,7 +115,7 @@ define('breakpointlistener', function(){
 			}
 		};
 
-		bph.updateBreakPoint = function(){
+		bph.updateBreakpoint = function(){
 			var width = this.getViewPortWidth()
 				, breakpoint = 'xs';
 
@@ -112,7 +125,7 @@ define('breakpointlistener', function(){
 				breakpoint = key;
 			}
 
-			bph.currentBreakPoint = breakpoint;
+			bph.currentBreakpoint = breakpoint;
 
 			return breakpoint;
 		};
