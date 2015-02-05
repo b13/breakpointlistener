@@ -54,8 +54,6 @@ define('breakpointlistener', function(){
 				,timestamp : new Date()
 			};
 
-			$(window).innerWidth();
-
 			if(evt.lastBreakPoint != evt.currentBreakPoint){
 				for(var index in bph.breakpointHandlers){
 					bph.breakpointHandlers[index].call(bph, evt);
