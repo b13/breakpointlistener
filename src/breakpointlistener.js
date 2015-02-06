@@ -44,7 +44,12 @@ define('breakpointlistener', ['bowser'], function(bowser){
 		}
 
 		function bindEvents() {
-			window.addEventListener('resize', bph.onResize, false)
+			if(bowser.msie && bowser.version <= 8){
+				window.attachEvent('onresize', bph.onResize);
+			}
+			else {
+				window.addEventListener('resize', bph.onResize, false);
+			}
 		}
 
 		function onResize() {
@@ -70,8 +75,13 @@ define('breakpointlistener', ['bowser'], function(bowser){
 			return bph.currentBreakpoint;
 		};
 
-		bph.getViewPortHeight = function(){
+		bph.getCssViewPortHeight = function(){
 			var e = window, a = 'inner';
+
+			if(bowser.msie && bowser.version <= 8){
+				return document.documentElement.offsetHeight;
+			}
+
 			if (!('innerHeight' in window )) {
 				a = 'client';
 				e = document.documentElement || document.body;
@@ -79,11 +89,11 @@ define('breakpointlistener', ['bowser'], function(bowser){
 			return e[ a+'Height' ];
 		};
 
-		bph.getViewPortWidth = function(){
+		bph.getCssViewPortWidth = function(){
 			var e = window, a = 'inner';
 
-			if(bowser.msie){
-				return document.documentElement.innderWidth
+			if(bowser.msie && bowser.version <= 8){
+				return document.documentElement.offsetWidth;
 			}
 
 			if (!('innerWidth' in window )) {
@@ -116,7 +126,7 @@ define('breakpointlistener', ['bowser'], function(bowser){
 		};
 
 		bph.updateBreakpoint = function(){
-			var width = this.getViewPortWidth()
+			var width = this.getCssViewPortWidth()
 				, breakpoint = 'xs';
 
 			for(var key in bph.options.breakpoints){
