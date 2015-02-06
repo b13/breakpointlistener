@@ -77,12 +77,12 @@ require([
 	function initialize(){
 		var currentBreakpoint;
 
-		B.jsXSContainer       = document.getElementsByClassName('bJS_visible-xs')[0];
-		B.jsSMContainer       = document.getElementsByClassName('bJS_visible-sm')[0];
-		B.jsMDContainer       = document.getElementsByClassName('bJS_visible-md')[0];
-		B.jsLGContainer       = document.getElementsByClassName('bJS_visible-lg')[0];
-		B.viewportWidthField  = document.getElementsByClassName('bJS_dataDisplay-width')[0];
-		B.viewportHeightField = document.getElementsByClassName('bJS_dataDisplay-height')[0];
+		B.jsXSContainer       = document.querySelectorAll('.bJS_visible-xs')[0];
+		B.jsSMContainer       = document.querySelectorAll('.bJS_visible-sm')[0];
+		B.jsMDContainer       = document.querySelectorAll('.bJS_visible-md')[0];
+		B.jsLGContainer       = document.querySelectorAll('.bJS_visible-lg')[0];
+		B.viewportWidthField  = document.querySelectorAll('.bJS_dataDisplay-width')[0];
+		B.viewportHeightField = document.querySelectorAll('.bJS_dataDisplay-height')[0];
 
 		B.BreakpointListener = new BPL({
 			breakpoints: {
@@ -132,14 +132,14 @@ require([
 					break;
 			}
 
-			B.viewportWidthField.innerHTML = B.BreakpointListener.getViewPortWidth();
-			B.viewportHeightField.innerHTML = B.BreakpointListener.getViewPortHeight();
+			B.viewportWidthField.innerHTML = B.BreakpointListener.getCssViewPortWidth();
+			B.viewportHeightField.innerHTML = B.BreakpointListener.getCssViewPortHeight();
 
 		});
 
 		window.addEventListener('resize', function(){
-			B.viewportWidthField.innerHTML = B.BreakpointListener.getViewPortWidth();
-			B.viewportHeightField.innerHTML = B.BreakpointListener.getViewPortHeight();
+			B.viewportWidthField.innerHTML = B.BreakpointListener.getCssViewPortWidth();
+			B.viewportHeightField.innerHTML = B.BreakpointListener.getCssViewPortWidth();
 		});
 	}
 

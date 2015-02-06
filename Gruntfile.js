@@ -101,7 +101,7 @@ module.exports = function (grunt) {
 		watch : {
 			dev: {
 				files: ['src/**/*.js'],
-				tasks: ['clean:test', 'copy:test']
+				tasks: ['devBuild']
 			}
 		}
 	});
