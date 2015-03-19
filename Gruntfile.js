@@ -119,7 +119,6 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-nodemon');
 
-	// Default task.
 	grunt.registerTask('release', ['copy:release', 'uglify']);
 
 	grunt.registerTask('devBuild', ['clean:test', 'copy:test', 'less:test', 'requirejs:test', 'concat:test']);
