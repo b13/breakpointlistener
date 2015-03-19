@@ -4,7 +4,7 @@ Breakpoint Listener
 Introduction
 ------------
 
-The breakpointListener is a small tool the listen to breakpoint changes in JS code in a resource economic way. Its 
+The breakpointListener is a small tool to listen to breakpoint changes in JS code in a resource economic way. Its 
 purpose is to register handlers that will be called on breakpoint changes.
 
 ### Initialization with AMD
