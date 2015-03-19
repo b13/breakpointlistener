@@ -1,7 +1,7 @@
 {
   "name": "breakpointlistener",
   "description": "A js util to handle breakpoints and listen to window size changes.",
-  "keywords": ["break ponints", "events", "handling", "javascript"],
+  "keywords": ["break points", "events", "handling", "javascript"],
   "homepage": "https://github.com/b13/breakpointlistener",
   "main": "dist/breakpointlistener.min.js",
   "version": "1.0.0",
