@@ -70,7 +70,7 @@ Functions
 ---------
 
 Function name | Return value | Description
---------- | ------------ | -----------
+------------- | ------------ | -----------
 getCurrentBreakpoint() | String | Returns the current breakpoint. Possible values are: 'xs', 'sm', 'md', 'lg'
 getCssViewPortHeight() | number | Returns the height of the viewport. This value corresponds to the height value that is used in css media queries.
 getCssViewPortWidth() | number | Returns the width of the viewport. This value corresponds to the width value that is used in css media queries. 
