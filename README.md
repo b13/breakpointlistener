@@ -65,4 +65,18 @@ Simply register callbacks to listen to breakpoint changes. The callback will rec
 - currentBreakpoint	// The breakpoint that is now active
 - lastBreakpoint	// The breakpoint that was active before the breakpoint change
 - timestamp			// Time when the change occurred
+
+Functions
+------------
+
+| Function name | Return value type | Description |
+| ------------- | ––––––––––––––––– | ––––––––––– |
+| getCurrentBreakpoint() | String | Returns the current breakpoint. Possible values are: 'xs', 'sm', 'md', 'lg' |
+| getCssViewPortHeight() | number | Returns the height of the viewport. This value corresponds to the height value that is used in css media queries. |
+| getCssViewPortWidth() | number | Returns the width of the viewport. This value corresponds to the width value that is used in css media queries. |
+| offChangeBreakpoint(function:handlerFunction) | function/undefined | Same as unregisterBreakpointHandler(function:handlerFunction). Unbinds the given handler from the onChangeBreakpoint event and returns it, if it was bound before. |
+| onChangeBreakpoint(function:handlerFunction) | function | Same as registerBreakpointHandler(function:handlerFunction). Binds the given handler to the onChangeBreakpoint event and returns it. |
+| registerBreakpointHandler(function:handlerFunction) | function | Binds the given handler to the onChangeBreakpoint event and returns it. |
+| unregisterBreakpointHandler(function:handlerFunction) | function/undefined | Unbinds the given handler from the onChangeBreakpoint event and returns it, if it was bound before. |
+| updateBreakpoint(boolean:preventEvent) | String | Forces the breakpoint handler to update the breakpoint value and and to trigger the onChangeBreakpoint event if the breakpoint changed and if the given preventEvent argument is false. |
 	

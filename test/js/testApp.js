@@ -137,10 +137,13 @@ require([
 
 		});
 
-		window.addEventListener('resize', function(){
-			B.viewportWidthField.innerHTML = B.BreakpointListener.getCssViewPortWidth();
-			B.viewportHeightField.innerHTML = B.BreakpointListener.getCssViewPortWidth();
-		});
+		window.addEventListener('resize', updateDimentionValueDisplay);
+		updateDimentionValueDisplay();
+	}
+
+	function updateDimentionValueDisplay(){
+		B.viewportWidthField.innerHTML = B.BreakpointListener.getCssViewPortWidth();
+		B.viewportHeightField.innerHTML = B.BreakpointListener.getCssViewPortHeight();
 	}
 
 	docReady(initialize);

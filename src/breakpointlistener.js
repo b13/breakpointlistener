@@ -36,8 +36,8 @@ define('breakpointlistener', ['bowser'], function(bowser){
 			bph.currentBreakpoint = bph.getCurrentBreakpoint();
 
 			//Bind function scope
-			bph.onResize = function(){
-				onResize.apply(bph, arguments);
+			bph._onResize = function(){
+				_onResize.apply(bph, arguments);
 			};
 
 			bindEvents();
@@ -45,17 +45,17 @@ define('breakpointlistener', ['bowser'], function(bowser){
 
 		function bindEvents() {
 			if(bowser.msie && bowser.version <= 8){
-				window.attachEvent('onresize', bph.onResize);
+				window.attachEvent('onresize', bph._onResize);
 			}
 			else {
-				window.addEventListener('resize', bph.onResize, false);
+				window.addEventListener('resize', bph._onResize, false);
 			}
 		}
 
-		function onResize() {
+		function _onResize() {
 			var evt = {
 				lastBreakpoint     : bph.currentBreakpoint
-				,currentBreakpoint : bph.updateBreakpoint()
+				,currentBreakpoint : _updateBreakpoint()
 				,timestamp : new Date()
 			};
 
@@ -68,9 +68,24 @@ define('breakpointlistener', ['bowser'], function(bowser){
 			}
 		}
 
+		function _updateBreakpoint(){
+			var width = bph.getCssViewPortWidth()
+				, breakpoint = 'xs';
+
+			for(var key in bph.options.breakpoints){
+				var val = bph.options.breakpoints[key];
+				if(width < val) break;
+				breakpoint = key;
+			}
+
+			bph.currentBreakpoint = breakpoint;
+
+			return breakpoint;
+		}
+
 		bph.getCurrentBreakpoint = function(){
 			if(!bph.currentBreakpoint){
-				bph.updateBreakpoint();
+				_updateBreakpoint();
 			}
 			return bph.currentBreakpoint;
 		};
@@ -104,17 +119,18 @@ define('breakpointlistener', ['bowser'], function(bowser){
 		};
 
 		bph.offChangeBreakpoint = function(handler){
-			bph.unregisterBreakpointHandler(handler);
+			return bph.unregisterBreakpointHandler(handler);
 		};
 
 		bph.onChangeBreakpoint = function(handler){
-			bph.registerBreakpointHandler(handler);
+			return bph.registerBreakpointHandler(handler);
 		};
 
 		bph.registerBreakpointHandler = function(handler){
 			if(typeof handler === 'function'){
 				bph.breakpointHandlers.push(handler);
 			}
+			return handler;
 		};
 
 		bph.unregisterBreakpointHandler = function(handler){
@@ -122,22 +138,20 @@ define('breakpointlistener', ['bowser'], function(bowser){
 
 			if(handlerIndex > -1){
 				bph.breakpointHandlers.splice(handlerIndex, 1);
+				return handler;
 			}
+			return void 0;
 		};
 
-		bph.updateBreakpoint = function(){
-			var width = this.getCssViewPortWidth()
-				, breakpoint = 'xs';
-
-			for(var key in bph.options.breakpoints){
-				var val = bph.options.breakpoints[key];
-				if(width < val) break;
-				breakpoint = key;
+		bph.updateBreakpoint = function(preventEvent){
+			if(preventEvent){
+				_updateBreakpoint();
+			}
+			else {
+				_onResize();
 			}
 
-			bph.currentBreakpoint = breakpoint;
-
-			return breakpoint;
+			return bph.currentBreakpoint;
 		};
 
 		initialize(opts);
