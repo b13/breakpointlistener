@@ -1,20 +1,34 @@
 {
   "name": "breakpointlistener",
   "description": "A js util to handle breakpoints and listen to window size changes.",
-  "keywords": ["breakpoint", "listener", "break points", "events", "handling", "javascript", "responsive", "resolution", "detection"],
+  "keywords": [
+    "breakpoint",
+    "breakpoints",
+    "listener",
+    "break points",
+    "events",
+    "handling",
+    "javascript",
+    "responsive",
+    "resolution",
+    "detection"
+  ],
   "homepage": "https://github.com/b13/breakpointlistener",
   "main": "dist/breakpointlistener.min.js",
   "version": "1.0.1",
   "license": "MIT",
   "authors": [
-    {"name": "Benjamin Gröner", "email": "groener@b13.de"}
+    {
+      "name": "Benjamin Gröner",
+      "email": "groener@b13.de"
+    }
   ],
   "repository": {
     "type": "git",
     "url": "git://github.com/b13/breakpointlistener.git"
   },
   "dependencies": {
-    "bowser": "~0.7.2"
+    "bowser": ">=0.7.2"
   },
   "ignore": [
     ".gitignore",
@@ -26,4 +40,3 @@
     "bootstrap": "~3.3.4"
   }
 }
-
